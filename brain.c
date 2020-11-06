@@ -19,7 +19,7 @@ int RGB_current_mode;
 
 // Switches off Game layer when idle
 void matrix_scan_user(void) {
-     if (timer_elapsed32(oled_timer) > 60000 && timer_elapsed32(oled_timer) < 79999 ) {
+     if (timer_elapsed32(oled_timer) > 300000 && timer_elapsed32(oled_timer) < 499999 ) {
      if (get_highest_layer(layer_state) == _GAME) {
           layer_off(_GAME);
           layer_on(_QWERTY);
@@ -72,8 +72,11 @@ void render_status_main(void) {
 void render_status_secondary(void) {
   switch (get_highest_layer(layer_state)){
     case _GAME:
-        render_logo_r();
+        render_game_r();
       //  testing_game();
+        break;
+   case _WEAPON:
+        render_weapon_r();
         break;
     default:
        render_anim();
@@ -109,9 +112,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // set_timelog();
 }
 
-  static uint16_t my_colon_timer;
-
-  switch (keycode) {
+switch (keycode) {
     case LOWER:
       if (record->event.pressed) {
         layer_on(_LOWER);
@@ -135,17 +136,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           layer_on(_ADJUST);
         } else {
           layer_off(_ADJUST);
-        }
-        return false;
-    case KC_RACL:
-        if (record->event.pressed) {
-          my_colon_timer = timer_read();
-          register_code(KC_RALT);
-        } else {
-          unregister_code(KC_RALT);
-          if (timer_elapsed(my_colon_timer) < TAPPING_TERM) {
-            SEND_STRING(":"); // Change the character(s) to be sent on tap here
-          }
         }
         return false;
     case RGBRST:
