@@ -16,6 +16,5 @@ enum custom_keycodes {
   ADJUST,
   GAME,
   WEAPON,
-  RGBRST,
-  KC_RACL // right alt / colon
+  RGBRST
 };
