@@ -7,7 +7,7 @@ extern uint8_t is_master;
 #define IDLE_FRAMES 5
 #define IDLE_SPEED 60
 #define TAP_FRAMES 2
-#define TAP_SPEED 40
+#define TAP_SPEED 60
 #define ANIM_FRAME_DURATION 200
 #define ANIM_SIZE 512
 
