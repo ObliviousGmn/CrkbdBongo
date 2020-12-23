@@ -17,20 +17,6 @@ uint32_t anim_sleep = 0;
 uint8_t current_idle_frame = 0;
 uint8_t current_tap_frame = 0;
 
-// Terminal blinker
-void render_prompt(void) {
-    bool blink = (timer_read() % 1000) < 500;
-      if (layer_state_is(_LOWER)) {
-          oled_write_ln_P(blink ? PSTR("> lo_") : PSTR("> lo "), false);
-      } else if (layer_state_is(_RAISE)) {
-          oled_write_ln_P(blink ? PSTR("> hi_") : PSTR("> hi "), false);
-      } else if (layer_state_is(_ADJUST)) {
-          oled_write_ln_P(blink ? PSTR("> aj_") : PSTR("> aj "), false);
-      } else {
-          oled_write_ln_P(blink ? PSTR("> _ ") : PSTR(">     "), false);
-      }
-};
-
 
 // Bongo Cat
 static void render_anim(void) {
